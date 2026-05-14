@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Lâminas</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="upload">
+
+  <div class="app-container" id="appView" style="display: flex;">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="logo-area" id="logoHomeBtn">
+          <div class="brand-logo-small">L</div>
+          <span class="logo-text">Lâminas UMC</span>
+        </div>
+        <div class="user-area">
+          <div class="user-icon">👤</div>
+          <div class="user-info">
+            <span class="user-name" id="loggedUserName">Utilizador</span>
+          </div>
+          <button class="logout-btn" id="logoutBtn" title="Sair do Sistema">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+<div class="nav-content">
+<button class="nav-item" data-page="upload">🔬 LÂMINAS</button>
+<button class="nav-item" data-page="compare">⚖️ ESTUDO COMPARATIVO</button>
+<button class="nav-item" data-page="admin" id="navAdmin" style="display:none;">⚙️ ACESSOS</button>
+<button class="nav-item" data-page="species" id="navSpecies" style="display:none;">🐾 CADASTRO DE ESPÉCIES</button>
+<button class="nav-item" data-page="anatomy" id="navAnatomy" style="display:none;">🧫 CADASTRO DE LESÕES</button>
+</div>
+</nav>
+
+    <main class="content main-container">
+      <section class="page active" id="upload">
+        <div class="card">
+          <div class="section-header">
+            <h2>Cadastro de Lâminas</h2>
+            <p>Escolha abaixo qual tipo de lâmina deseja registar.</p>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-upload-tab="healthy">Lâmina Saudável</button>
+            <button class="tab" data-upload-tab="sick">Lâmina Doente</button>
+          </div>
+
+          <div class="admin-tab-content active" id="uploadHealthyTab">
+            <div class="card" style="box-shadow:none; border:1px solid var(--border); padding:32px;">
+              <h2 class="title-section">Lâmina Saudável</h2>
+              <form id="slideHealthyForm">
+                <label>Upload de imagens (Saudável)</label>
+                <input accept="image/*" id="slideHealthyFile" multiple type="file"/>
+                <div class="thumbnail-gallery" id="slideHealthyGallery"></div>
+
+                <div class="upload-canvas-area" id="slideHealthyPreviewArea" style="display: none;">
+                  <div class="panel-header">
+                    <span id="slideHealthyEditorTitle">A editar imagem</span>
+                    <div class="toolbar">
+                      <button class="tool-btn active" data-tool="rect" type="button">▢</button>
+                      <button class="tool-btn" data-tool="arrow" type="button">↗</button>
+                      <button class="tool-btn danger" id="slideHealthyClear" type="button">🧹 Limpar</button>
+                    </div>
+                  </div>
+                  <canvas id="slideHealthyUploadCanvas"></canvas>
+                </div>
+
+                <div class="grid two">
+                  <div>
+                    <label>Espécie</label>
+                    <select id="slideHealthySpecies" required></select>
+                  </div>
+                  <div>
+                    <label>Local da Coleta</label>
+                    <select id="slideHealthyRegion" required></select>
+                  </div>
+                </div>
+
+                <div class="grid two">
+                  <div>
+                    <label>Aumento</label>
+                    <input id="slideHealthyZoom" required type="text"/>
+                  </div>
+                  <div>
+                    <label>ID da Coleta</label>
+                    <input id="slideHealthyCollectionId" required type="text"/>
+                  </div>
+                </div>
+
+                <label>Tipo de Lâmina</label>
+                <select id="slideHealthyCategory" required>
+                  <option value="">Selecione</option>
+                  <option value="Patológico">Patológico</option>
+                  <option value="Citológico">Citológico</option>
+                  <option value="Parasitológico">Parasitológico</option>
+                </select>
+
+                <details class="retractable-panel mt-3">
+                  <summary>Pigmentação</summary>
+                  <label>Tipo de pigmentação</label>
+                  <select id="slideHealthyPigmentation" required>
+                    <option value="">Selecione</option>
+                    <option>Hematoxilina e Eosina (HE)</option>
+                    <option>Gram</option>
+                    <option>Ziehl-Neelsen</option>
+                    <option>PAS</option>
+                    <option>Giemsa</option>
+                    <option>Wright</option>
+                    <option>Tricrômico de Masson</option>
+                    <option>Grocott / GMS</option>
+                    <option>Azul de Toluidina</option>
+                  </select>
+                </details>
+
+                <button class="btn-primary block mt-4" type="submit">Gravar Lâmina Saudável</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="admin-tab-content" id="uploadSickTab">
+            <div class="card border-accent" style="box-shadow:none; padding:32px;">
+              <h2 class="title-section text-accent">Lâmina Patológica</h2>
+              <form id="slideSickForm">
+                <div class="upload-sick-layout">
+                  <div class="upload-sick-form-column">
+                    <label>Upload de imagens (Patologia)</label>
+                    <input accept="image/*" id="slideSickFile" multiple type="file"/>
+                    <div class="thumbnail-gallery" id="slideSickGallery"></div>
+
+                    <div class="upload-canvas-area" id="slideSickPreviewArea" style="display: none;">
+                      <div class="panel-header">
+                        <span id="slideSickEditorTitle">A editar imagem</span>
+                        <div class="toolbar">
+                          <button class="tool-btn active" data-tool="rect" type="button">▢</button>
+                          <button class="tool-btn" data-tool="arrow" type="button">↗</button>
+                          <button class="tool-btn danger" id="slideSickClear" type="button">🧹 Limpar</button>
+                        </div>
+                      </div>
+                      <canvas id="slideSickUploadCanvas"></canvas>
+                    </div>
+
+                    <div class="grid two">
+                      <div>
+                        <label>ID da Coleta</label>
+                        <input id="slideSickCollectionId" required type="text"/>
+                      </div>
+                      <div>
+                        <label>Aumento</label>
+                        <input id="slideSickZoom" required type="text"/>
+                      </div>
+                    </div>
+
+                    <div class="grid two">
+                      <div>
+                        <label>Espécie</label>
+                        <select id="slideSickSpecies" required></select>
+                      </div>
+                      <div>
+                        <label>Local da Coleta</label>
+                        <select id="slideSickRegion" required></select>
+                      </div>
+                    </div>
+
+                    <div class="grid two">
+                      <div>
+                        <label>Lesão Selecionada</label>
+                        <input id="slideSickLesion" type="hidden"/>
+                        <div class="sick-lesion-picker">
+                          <select id="slideSickLesionTypeSelector"></select>
+                          <select id="slideSickOrganRegion" class="sick-lesion-organ-field" disabled hidden></select>
+                          <select id="slideSickOrganPart" class="sick-lesion-organ-field" disabled hidden></select>
+                          <select id="slideSickAffectedOrgan" class="sick-lesion-organ-field" disabled hidden></select>
+                          <select id="slideSickBoneName" class="sick-lesion-bone-field" disabled hidden></select>
+                          <select id="slideSickBoneRegion" class="sick-lesion-bone-field" disabled hidden></select>
+                          <select id="slideSickLesionSubtype" disabled hidden></select>
+                          <select id="slideSickLesionName" disabled hidden></select>
+                        </div>
+                      </div>
+                      <div>
+                        <label>Tipo de Lâmina</label>
+                        <select id="slideSickCategory" required>
+                          <option value="">Selecione</option>
+                          <option value="Patológico">Patológico</option>
+                          <option value="Citológico">Citológico</option>
+                          <option value="Parasitológico">Parasitológico</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <details class="retractable-panel mt-3">
+                      <summary>Pigmentação</summary>
+                      <label>Tipo de pigmentação</label>
+                      <select id="slideSickPigmentation" required>
+                        <option value="">Selecione</option>
+                        <option>Hematoxilina e Eosina (HE)</option>
+                        <option>Gram</option>
+                        <option>Ziehl-Neelsen</option>
+                        <option>PAS</option>
+                        <option>Giemsa</option>
+                        <option>Wright</option>
+                        <option>Tricrômico de Masson</option>
+                        <option>Grocott / GMS</option>
+                        <option>Azul de Toluidina</option>
+                      </select>
+                    </details>
+
+                    <label>Descrição</label>
+                    <textarea id="slideSickDescription" placeholder="Descreva os achados celulares..." required rows="4"></textarea>
+
+                    <button class="btn-accent block mt-4" type="submit">Gravar Lâmina Patológica</button>
+                  </div>
+
+                  <aside class="upload-sick-reference-column">
+                    <div class="reference-panel">
+                      <div class="reference-panel-header">
+                        <h3>Referências saudáveis compatíveis</h3>
+                        <p>As lâminas saudáveis do lado são filtradas automaticamente por espécie, local da coleta e tipo de lâmina.</p>
+                      </div>
+
+                      <div class="reference-helper">
+                        Clique uma vez para vincular. Clique duas vezes para abrir em tela cheia sem distorcer a imagem.
+                      </div>
+
+                      <input id="slideSickLinkedHealthyId" type="hidden"/>
+                      <div class="selected-value-display" id="selectedSlideHealthyReferenceDisplay" style="display: none;"></div>
+                      <div class="healthy-reference-grid" id="slideHealthyReferenceGrid"></div>
+                    </div>
+                  </aside>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div aria-hidden="true" class="image-lightbox" id="healthyReferenceLightbox">
+    <div class="image-lightbox-backdrop" data-close-lightbox="true"></div>
+    <div class="image-lightbox-content">
+      <button class="image-lightbox-close" id="healthyReferenceLightboxClose" type="button">✕</button>
+      <img alt="Visualização ampliada da referência saudável" id="healthyReferenceLightboxImage"/>
+      <div class="image-lightbox-caption" id="healthyReferenceLightboxCaption"></div>
+    </div>
+  </div>
+
+  <div aria-hidden="true" class="image-lightbox" id="uploadPreviewLightbox">
+    <div class="image-lightbox-backdrop" data-close-upload-lightbox="true"></div>
+    <div class="image-lightbox-content">
+      <button class="image-lightbox-close" id="uploadPreviewLightboxClose" type="button">✕</button>
+      <img alt="Visualização ampliada da imagem selecionada" id="uploadPreviewLightboxImage"/>
+      <div class="image-lightbox-caption" id="uploadPreviewLightboxCaption"></div>
+    </div>
+  </div>
+
+  <script src="./js/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Autenticação</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet">
+</link></head>
+<body data-page="login">
+
+  <div id="landingView" class="landing-container active">
+    <div class="landing-content">
+      <div class="landing-info">
+<div class="brand-logo-large">L</div>
+<h1>Bem-vindo ao Lâminas UMC</h1>
+<p class="subtitle">Sistema de gestão e análise comparativa de lâminas veterinárias.</p>
+
+</div>
+      <div class="landing-auth">
+        <div class="auth-card">
+          
+          <div class="auth-tabs" id="authTabsContainer">
+            <a class="auth-tab active" href="./login.html">Entrar</a>
+            <a class="auth-tab " href="./register.html">Registar</a>
+          </div>    
+          <form class="auth-form active" id="loginForm">
+<h2>Acesse à sua conta</h2>
+<label>Tipo de Acesso</label>
+<div class="role-toggle-container">
+<input checked="" id="loginRoleStudent" name="loginRole" type="radio" value="student"/>
+<label for="loginRoleStudent">Sou Aluno</label>
+<input id="loginRoleAdmin" name="loginRole" type="radio" value="admin"/>
+<label for="loginRoleAdmin">Sou Professor</label>
+</div>
+<label>E-mail Institucional</label>
+<input id="loginEmail" placeholder="E-mail" required="" type="email"/>
+<div id="loginRgmContainer">
+<label>RGM</label>
+<input id="loginRgm" placeholder="Digite o seu RGM" required="" type="text"/>
+</div>
+<label>Senha</label>
+<input id="loginPassword" placeholder="••••••••" required="" type="password">
+<button class="btn-primary mt-3 block" type="submit">Acessar ao Sistema</button>
+<div class="feedback" id="loginFeedback"></div>
+</input></form>
+          <div style="padding: 0 40px 36px;">
+            <a href="./register.html" class="btn-outline block" style="text-decoration:none; text-align:center;">Criar conta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

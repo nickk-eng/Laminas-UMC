@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Comparação</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="compare">
+
+  <div class="app-container" id="appView" style="display: flex;">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="logo-area" id="logoHomeBtn">
+          <div class="brand-logo-small">L</div>
+          <span class="logo-text">Lâminas UMC</span>
+        </div>
+        <div class="user-area">
+          <div class="user-icon">👤</div>
+          <div class="user-info">
+            <span class="user-name" id="loggedUserName">Utilizador</span>
+          </div>
+          <button class="logout-btn" id="logoutBtn" title="Sair do Sistema">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+<div class="nav-content">
+<button class="nav-item" data-page="upload">🔬 LÂMINAS</button>
+<button class="nav-item" data-page="compare">⚖️ ESTUDO COMPARATIVO</button>
+<button class="nav-item" data-page="admin" id="navAdmin" style="display:none;">⚙️ ACESSOS</button>
+<button class="nav-item" data-page="species" id="navSpecies" style="display:none;">🐾 CADASTRO DE ESPÉCIES</button>
+<button class="nav-item" data-page="anatomy" id="navAnatomy" style="display:none;">🧫 CADASTRO DE LESÕES</button>
+</div>
+</nav>
+
+    <main class="content main-container">
+      <section class="page active" id="compare">
+        <div class="card">
+          <div class="section-header">
+            <h2>Estudo Comparativo de Lâminas</h2>
+            <p>Pesquise pela lâmina doente. Se existir vínculo, a lâmina saudável aparecerá automaticamente ao lado.</p>
+          </div>
+
+          <div class="compare-search-shell">
+            <label id="sickSearchLabel">Selecionar Caso Patológico (Lâmina)</label>
+            <div class="search-wrapper">
+              <input id="sickSearch" placeholder="🔍 Ex: HE, biópsia, citologia, hepática..." type="text"/>
+            </div>
+            <div class="search-results" id="sickResults"></div>
+          </div>
+
+          <div class="comparison-area comparison-area-dynamic mt-4" id="comparisonArea">
+            <div class="xray-panel comparison-panel hidden" id="healthyPanel">
+              <h3 class="panel-title healthy-title" id="healthyPanelTitle">Imagem de Referência (Saudável)</h3>
+              <div class="xray-image" id="healthyPreview">A aguardar vínculo automático</div>
+              <div class="compare-gallery" id="healthyCompareGallery"></div>
+              <div class="info-box" id="healthyInfo"></div>
+            </div>
+
+            <div class="xray-panel border-accent comparison-panel comparison-panel-main" id="sickPanel">
+              <h3 class="panel-title sick-title text-accent" id="sickPanelTitle">Achado Clínico (Patológico)</h3>
+              <div class="xray-image sick" id="sickPreview">A aguardar seleção</div>
+              <div class="compare-gallery" id="sickCompareGallery"></div>
+              <div class="info-box" id="sickInfo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div aria-hidden="true" class="image-lightbox" id="comparisonLightbox">
+    <div class="image-lightbox-backdrop" data-close-comparison-lightbox="true"></div>
+    <div class="image-lightbox-content">
+      <button class="image-lightbox-close" id="comparisonLightboxClose" type="button">✕</button>
+      <img alt="Visualização ampliada do estudo comparativo" id="comparisonLightboxImage"/>
+      <div class="image-lightbox-caption" id="comparisonLightboxCaption"></div>
+    </div>
+  </div>
+
+  <script src="./js/app.js" type="module"></script>
+</body>
+</html>

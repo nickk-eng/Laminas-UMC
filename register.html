@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Autenticação</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet">
+</link></head>
+<body data-page="register">
+
+  <div id="landingView" class="landing-container active">
+    <div class="landing-content">
+      <div class="landing-info">
+<div class="brand-logo-large">L</div>
+<h1>Bem-vindo ao Lâminas UMC</h1>
+<p class="subtitle">Sistema de gestão e análise comparativa de lâminas veterinárias.</p>
+
+</div>
+      <div class="landing-auth">
+        <div class="auth-card">
+          
+          <div class="auth-tabs" id="authTabsContainer">
+            <a class="auth-tab " href="./login.html">Entrar</a>
+            <a class="auth-tab active" href="./register.html">Registar</a>
+          </div>    
+          <form class="auth-form active" id="registerForm">
+<h2>Solicitar Acesso</h2>
+<label>Nome Completo</label>
+<input id="registerName" placeholder="Nome completo" required="" type="text"/>
+<label>E-mail Institucional</label>
+<input id="registerEmail" placeholder="E-mail" required="" type="email"/>
+<div class="email-confirmation-actions">
+<button class="btn-outline block" id="sendRegisterCodeBtn" type="button">Enviar codigo de confirmacao</button>
+</div>
+<div class="email-code-area" id="registerCodeArea">
+<label>Codigo</label>
+<input id="registerCode" inputmode="numeric" maxlength="6" placeholder="Digite o codigo recebido" type="text"/>
+<div class="email-preview" id="registerEmailPreview"></div>
+</div>
+<div class="grid two">
+<div>
+<label>Senha</label>
+<input id="registerPassword" placeholder="Crie uma senha" required="" type="password"/>
+</div>
+<div>
+<label>Repetir senha</label>
+<input id="registerPasswordConfirm" placeholder="Repita a senha" required="" type="password"/>
+</div>
+</div>
+<div>
+<label>Perfil</label>
+<select id="registerRole" required="">
+<option value="">Selecione</option>
+<option value="student">Aluno</option>
+<option value="teacher">Professor</option>
+</select>
+</div>
+<div id="rgmContainer" style="display: none; margin-top: 16px;">
+<label>RGM</label>
+<input id="registerRgm" placeholder="Apenas números" type="text"/>
+</div>
+<button class="btn-primary mt-3 block" type="submit">Criar Conta</button>
+<div class="feedback" id="registerFeedback"></div>
+</form>
+          <div style="padding: 0 40px 36px;">
+            <a href="./login.html" class="btn-outline block" style="text-decoration:none; text-align:center;">Já tenho conta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

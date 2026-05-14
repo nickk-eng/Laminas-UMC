@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Discos</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet">
+</link></head>
+<body data-page="disc">
+
+  <div id="appView" class="app-container" style="display: flex;">
+    <header class="main-header">
+<div class="header-content">
+<div class="logo-area" id="logoHomeBtn">
+<div class="brand-logo-small">L</div>
+<span class="logo-text">Lâminas UMC</span>
+</div>
+<div class="user-area">
+<div class="user-icon">👤</div>
+<div class="user-info">
+<span class="user-name" id="loggedUserName">Utilizador</span>
+</div>
+<button class="logout-btn" id="logoutBtn" title="Sair do Sistema">Sair</button>
+</div>
+</div>
+</header>
+    <nav class="main-nav">
+<div class="nav-content">
+<button class="nav-item" data-page="upload">🔬 LÂMINAS</button>
+<button class="nav-item" data-page="compare">⚖️ ESTUDO COMPARATIVO</button>
+<button class="nav-item" data-page="admin" id="navAdmin" style="display:none;">⚙️ ACESSOS</button>
+<button class="nav-item" data-page="species" id="navSpecies" style="display:none;">🐾 CADASTRO DE ESPÉCIES</button>
+<button class="nav-item" data-page="anatomy" id="navAnatomy" style="display:none;">🧫 CADASTRO DE LESÕES</button>
+</div>
+</nav>
+    <main class="content main-container">
+      <section class="page active" id="disc">
+<div class="grid two equal">
+<div class="card">
+<h2 class="title-section">Coluna: Disco Saudável</h2>
+<form id="discHealthyForm">
+<label>Upload de imagens (Ressonância/Tomografia)</label>
+<input accept="image/*" id="discHealthyFile" multiple="" type="file"/>
+<div class="thumbnail-gallery" id="discHealthyGallery"></div>
+<div class="upload-canvas-area" id="discHealthyPreviewArea" style="display: none;">
+<div class="panel-header">
+<span id="discHealthyEditorTitle">A editar Imagem</span>
+<div class="toolbar">
+<button class="tool-btn active" data-tool="rect" type="button">🟦</button>
+<button class="tool-btn" data-tool="arrow" type="button">↗️</button>
+<button class="tool-btn danger" id="discHealthyClear" type="button">🧹 Limpar</button>
+</div>
+</div>
+<canvas id="discHealthyUploadCanvas"></canvas>
+</div>
+<div class="grid two">
+<div><label>Nº Prontuário</label><input id="discHealthyId" required="" type="text"/></div>
+<div>
+<label>Região da Coluna</label>
+<select id="discHealthyRegion" required="">
+<option value="">Selecione</option>
+<option>Cervical (C1-C7)</option>
+<option>Torácica (T1-T13)</option>
+<option>Lombar (L1-L7)</option>
+<option>Sacral (S1-S3)</option>
+</select>
+</div>
+</div>
+<div class="grid two">
+<div>
+<label>Espécie</label>
+<select id="discHealthySpecies" required=""></select>
+</div>
+<div>
+<label>Raça</label>
+<select disabled="" id="discHealthyBreed" required="">
+<option value="">Selecione a espécie primeiro</option>
+</select>
+</div>
+</div>
+<button class="btn-primary block mt-4" type="submit">Gravar Disco de Referência</button>
+</form>
+</div>
+<div class="card border-accent">
+<h2 class="title-section text-accent">Coluna: Achado Patológico (Disco)</h2>
+<form id="discSickForm">
+<label>Upload de imagens (Ressonância/Tomografia)</label>
+<input accept="image/*" id="discSickFile" multiple="" type="file"/>
+<div class="thumbnail-gallery" id="discSickGallery"></div>
+<div class="upload-canvas-area" id="discSickPreviewArea" style="display: none;">
+<div class="panel-header">
+<span id="discSickEditorTitle">A editar Imagem</span>
+<div class="toolbar">
+<button class="tool-btn active" data-tool="rect" type="button">🟦</button>
+<button class="tool-btn" data-tool="arrow" type="button">↗️</button>
+<button class="tool-btn danger" id="discSickClear" type="button">🧹 Limpar</button>
+</div>
+</div>
+<canvas id="discSickUploadCanvas"></canvas>
+</div>
+<div class="grid two">
+<div><label>Nº Prontuário</label><input id="discSickId" required="" type="text"/></div>
+<div>
+<label>Região da Coluna</label>
+<select id="discSickRegion" required="">
+<option value="">Selecione</option>
+<option>Cervical (C1-C7)</option>
+<option>Torácica (T1-T13)</option>
+<option>Lombar (L1-L7)</option>
+<option>Sacral (S1-S3)</option>
+</select>
+</div>
+</div>
+<div class="grid two">
+<div>
+<label>Espécie</label>
+<select id="discSickSpecies" required=""></select>
+</div>
+<div>
+<label>Raça</label>
+<select disabled="" id="discSickBreed" required="">
+<option value="">Selecione a espécie primeiro</option>
+</select>
+</div>
+</div>
+<label class="mt-3">Patologia Discal</label>
+<input id="discSickCondition" placeholder="Ex: Extrusão Hansen Tipo I..." required="" type="text"/>
+<label>Laudo / Descrição</label>
+<textarea id="discSickDescription" required="" rows="3"></textarea>
+<button class="btn-accent block mt-4" type="submit">Gravar Patologia de Disco</button>
+</form>
+</div>
+</div>
+</section>
+    </main>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

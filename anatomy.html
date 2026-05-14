@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Cadastro de Lesões</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="anatomy">
+
+  <div class="app-container" id="appView" style="display: flex;">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="logo-area" id="logoHomeBtn">
+          <div class="brand-logo-small">L</div>
+          <span class="logo-text">Lâminas UMC</span>
+        </div>
+        <div class="user-area">
+          <div class="user-icon">👤</div>
+          <div class="user-info">
+            <span class="user-name" id="loggedUserName">Utilizador</span>
+          </div>
+          <button class="logout-btn" id="logoutBtn" title="Sair do Sistema">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+<div class="nav-content">
+<button class="nav-item" data-page="upload">🔬 LÂMINAS</button>
+<button class="nav-item" data-page="compare">⚖️ ESTUDO COMPARATIVO</button>
+<button class="nav-item" data-page="admin" id="navAdmin" style="display:none;">⚙️ ACESSOS</button>
+<button class="nav-item" data-page="species" id="navSpecies" style="display:none;">🐾 CADASTRO DE ESPÉCIES</button>
+<button class="nav-item" data-page="anatomy" id="navAnatomy" style="display:none;">🧫 CADASTRO DE LESÕES</button>
+</div>
+</nav>
+
+    <main class="content main-container">
+      <section class="page active" id="anatomy">
+        <div class="card border-accent">
+          <div class="section-header">
+            <h2>Cadastro de Lesões</h2>
+            <p>Cadastre lesões de órgão e lesões ósseas usadas automaticamente nos formulários do sistema.</p>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-lesion-tab="organLesionTab">Lesões de Órgão</button>
+            <button class="tab" data-lesion-tab="boneLesionTab">Lesões Ósseas</button>
+          </div>
+
+          <div class="lesion-tab-content active admin-tab-content" id="organLesionTab">
+            <div class="grid two equal">
+              <div>
+                <form id="addOrganLesionForm">
+                  <label>Região Principal</label>
+                  <input id="organBodyRegion" data-suggestions="organBodyRegionOptions" placeholder="Ex: Abdómen, Cabeça, Tórax" required type="text"/>
+                  <datalist id="organBodyRegionOptions"></datalist>
+
+                  <label>Parte da Região</label>
+                  <input id="organPart" data-suggestions="organPartOptions" placeholder="Ex: Quadrante cranial, lado esquerdo" required type="text"/>
+                  <datalist id="organPartOptions"></datalist>
+
+                  <label>Órgão Afetado</label>
+                  <input id="affectedOrgan" data-suggestions="affectedOrganOptions" placeholder="Ex: Coração, fígado, pulmão" required type="text"/>
+                  <datalist id="affectedOrganOptions"></datalist>
+
+                  <label>Tipo de Lesão</label>
+                  <input id="organLesionType" data-suggestions="organLesionTypeOptions" placeholder="Ex: Inflamatória, traumática, degenerativa" required type="text"/>
+                  <datalist id="organLesionTypeOptions"></datalist>
+
+                  <label>Nome da Lesão</label>
+                  <input id="organLesionName" data-suggestions="organLesionNameOptions" placeholder="Ex: Cardiomegalia" required type="text"/>
+                  <datalist id="organLesionNameOptions"></datalist>
+
+                  <button class="btn-primary mt-3 block" type="submit">Cadastrar Lesão de Órgão</button>
+                </form>
+              </div>
+
+              <div class="info-box lesion-drawer" style="background: white;">
+                <button class="lesion-drawer-toggle" type="button" aria-expanded="true" title="Recolher lista">‹</button>
+                <div class="lesion-drawer-content">
+                  <h3 style="margin-top:0; color:var(--vet-primary); border-bottom:1px solid var(--border); padding-bottom:8px;">Lesões de Órgão Cadastradas</h3>
+                  <div id="adminOrganLesionList" style="max-height: 320px; overflow-y: auto;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesion-tab-content admin-tab-content" id="boneLesionTab">
+            <div class="grid two equal">
+              <div>
+                <form id="addBoneLesionForm">
+                  <label>Nome do Osso</label>
+                  <input id="boneName" data-suggestions="boneNameOptions" placeholder="Ex: Fêmur, mandíbula, rádio" required type="text"/>
+                  <datalist id="boneNameOptions"></datalist>
+
+                  <label>Região do Osso</label>
+                  <input id="boneRegion" data-suggestions="boneRegionOptions" placeholder="Ex: Cabeça, membro torácico" required type="text"/>
+                  <datalist id="boneRegionOptions"></datalist>
+
+                  <label>Tipo de Lesão</label>
+                  <input id="boneLesionType" data-suggestions="boneLesionTypeOptions" placeholder="Ex: Traumática, degenerativa" required type="text"/>
+                  <datalist id="boneLesionTypeOptions"></datalist>
+
+                  <label>Nome da Lesão</label>
+                  <input id="boneLesionName" data-suggestions="boneLesionNameOptions" placeholder="Ex: Fratura mandibular" required type="text"/>
+                  <datalist id="boneLesionNameOptions"></datalist>
+
+                  <button class="btn-primary mt-3 block" type="submit">Cadastrar Lesão Óssea</button>
+                </form>
+              </div>
+
+              <div class="info-box lesion-drawer" style="background: white;">
+                <button class="lesion-drawer-toggle" type="button" aria-expanded="true" title="Recolher lista">‹</button>
+                <div class="lesion-drawer-content">
+                  <h3 style="margin-top:0; color:var(--vet-primary); border-bottom:1px solid var(--border); padding-bottom:8px;">Lesões Ósseas Cadastradas</h3>
+                  <div id="adminBoneLesionList" style="max-height: 320px; overflow-y: auto;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./js/app.js" type="module"></script>
+</body>
+</html>

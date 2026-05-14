@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lâminas UMC - Gestão de Acessos</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/styles.css" rel="stylesheet">
+</link></head>
+<body data-page="admin">
+
+  <div id="appView" class="app-container" style="display: flex;">
+    <header class="main-header">
+<div class="header-content">
+<div class="logo-area" id="logoHomeBtn">
+<div class="brand-logo-small">L</div>
+<span class="logo-text">Lâminas UMC</span>
+</div>
+<div class="user-area">
+<div class="user-icon">👤</div>
+<div class="user-info">
+<span class="user-name" id="loggedUserName">Utilizador</span>
+</div>
+<button class="logout-btn" id="logoutBtn" title="Sair do Sistema">Sair</button>
+</div>
+</div>
+</header>
+    <nav class="main-nav">
+<div class="nav-content">
+<button class="nav-item" data-page="upload">🔬 LÂMINAS</button>
+<button class="nav-item" data-page="compare">⚖️ ESTUDO COMPARATIVO</button>
+<button class="nav-item" data-page="admin" id="navAdmin" style="display:none;">⚙️ ACESSOS</button>
+<button class="nav-item" data-page="species" id="navSpecies" style="display:none;">🐾 CADASTRO DE ESPÉCIES</button>
+<button class="nav-item" data-page="anatomy" id="navAnatomy" style="display:none;">🧫 CADASTRO DE LESÕES</button>
+</div>
+</nav>
+    <main class="content main-container">
+      <section class="page active" id="admin">
+<div class="card">
+<div class="section-header">
+<h2>Gestão de Acessos</h2>
+<p>Aprove ou rejeite o acesso de alunos e de professores ao sistema Lâminas UMC.</p>
+</div>
+<div class="tabs">
+<button class="tab active" data-admin-tab="students">Solicitações de Alunos</button>
+<button class="tab" data-admin-tab="teachers">Solicitações de Professores</button>
+<button class="tab" data-admin-tab="studentPermissions">Permissões de Alunos</button>
+</div>
+<div class="admin-tab-content active" id="studentsTab"><div class="approval-list" id="studentsList"></div></div>
+<div class="admin-tab-content" id="teachersTab"><div class="approval-list" id="teachersList"></div></div>
+<div class="admin-tab-content" id="studentPermissionsTab">
+<div class="student-permission-manager">
+<label>Buscar aluno por RGM</label>
+<input id="studentPermissionSearch" placeholder="Digite o RGM do aluno" type="text"/>
+<div class="search-results mt-2" id="studentPermissionResults"></div>
+<div class="student-permission-panel" id="studentPermissionPanel" hidden>
+<div class="student-permission-summary" id="studentPermissionSummary"></div>
+<p class="permission-help">Marque com X quais permissões deseja dar para este aluno.</p>
+<div class="permission-options">
+<label class="permission-option"><input id="permDeleteComparisonRecords" type="checkbox"/> Conseguir excluir imagens na análise comparativa</label>
+<label class="permission-option"><input id="permManageSpecies" type="checkbox"/> Conseguir cadastrar espécies e raças</label>
+<label class="permission-option"><input id="permManageLesions" type="checkbox"/> Conseguir cadastrar lesões ósseas e de órgãos</label>
+<label class="permission-option"><input id="permManageAccess" type="checkbox"/> Liberar acesso de professores ou alunos</label>
+</div>
+<label>Senha da sua conta</label>
+<input id="permissionOperatorPassword" placeholder="Confirme com a sua senha" type="password"/>
+<button class="btn-primary mt-3 block" id="applyStudentPermissions" type="button">Aplicar permissões nesta conta</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+    </main>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
