@@ -15,7 +15,34 @@ loadEnvFile();
 const PORT = Number(process.env.PORT || 3000);
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 const CODE_TTL_MS = 10 * 60 * 1000;
-const database = await createDatabase();
+
+let dbInstance = null;
+let dbInitError = null;
+const dbInitPromise = Promise.race([
+  createDatabase(),
+  new Promise((_, reject) => setTimeout(() => reject(new Error("Database initialization timed out after 15s")), 15000)),
+]);
+dbInitPromise
+  .then((db) => { dbInstance = db; })
+  .catch((err) => { dbInitError = err; console.error("[DATABASE] Init failed:", err); });
+
+const SYNC_DB_METHODS = new Set(["verifyPassword", "toPublicUser", "toJsUser", "toExamItem"]);
+const database = new Proxy({}, {
+  get(target, prop) {
+    if (SYNC_DB_METHODS.has(prop)) {
+      return (...args) => {
+        if (dbInitError) throw dbInitError;
+        if (!dbInstance) throw new Error("Database is still initializing.");
+        return dbInstance[prop](...args);
+      };
+    }
+    return async (...args) => {
+      if (dbInitError) throw dbInitError;
+      const db = dbInstance || await dbInitPromise;
+      return db[prop](...args);
+    };
+  },
+});
 
 const app = express();
 

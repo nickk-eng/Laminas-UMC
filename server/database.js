@@ -66,6 +66,7 @@ export async function createDatabase() {
     multipleStatements: true,
     charset: "utf8mb4",
     timezone: "Z",
+    connectTimeout: 15000,
   });
 
   const database = new AppDatabase(pool);
@@ -658,6 +659,7 @@ async function ensureMysqlDatabase(config) {
   const connection = await mysql.createConnection({
     ...serverConfig,
     multipleStatements: false,
+    connectTimeout: 15000,
   });
 
   try {
