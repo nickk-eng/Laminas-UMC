@@ -54,12 +54,14 @@ const DEFAULT_PERMISSIONS = {
 
 export async function createDatabase() {
   const config = getMysqlConfig();
-  await ensureMysqlDatabase(config);
+  if (process.env.VERCEL !== "1") {
+    await ensureMysqlDatabase(config);
+  }
 
   const pool = mysql.createPool({
     ...config,
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: Number(process.env.DB_POOL_LIMIT || 3),
     queueLimit: 0,
     multipleStatements: true,
     charset: "utf8mb4",

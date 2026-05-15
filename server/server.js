@@ -298,10 +298,14 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: error.publicMessage || "Erro interno do servidor." });
 });
 
-app.listen(PORT, () => {
-  console.log(`Lâminas UMC rodando em http://localhost:${PORT}`);
-  console.log(`Banco MySQL: ${process.env.DB_NAME || "laminas_umc"}`);
-});
+if (process.env.VERCEL !== "1") {
+  app.listen(PORT, () => {
+    console.log(`Lâminas UMC rodando em http://localhost:${PORT}`);
+    console.log(`Banco MySQL: ${process.env.DB_NAME || "laminas_umc"}`);
+  });
+}
+
+export { app };
 
 function cleanText(value) {
   return String(value || "").trim();
