@@ -336,7 +336,7 @@ if (!process.env.VERCEL && !process.env.VERCEL_ENV) {
   });
 }
 
-export { app };
+export default app;
 
 function cleanText(value) {
   return String(value || "").trim();
