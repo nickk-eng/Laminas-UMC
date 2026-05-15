@@ -336,8 +336,6 @@ if (!process.env.VERCEL && !process.env.VERCEL_ENV) {
   });
 }
 
-export default app;
-
 function cleanText(value) {
   return String(value || "").trim();
 }
@@ -571,3 +569,5 @@ function loadEnvFile() {
     }
   });
 }
+
+export default app;
