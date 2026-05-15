@@ -135,6 +135,10 @@ app.post("/api/auth/register", async (req, res, next) => {
   }
 });
 
+app.post("/api/auth/hello", async (req, res, next) => {
+    res.json({ message: 'hello world' });
+})
+
 app.post("/api/auth/login", async (req, res, next) => {
   try {
     const selectedRole = cleanText(req.body.selectedRole);
