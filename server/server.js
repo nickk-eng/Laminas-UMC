@@ -16,29 +16,25 @@ const PORT = Number(process.env.PORT || 3000);
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 const CODE_TTL_MS = 10 * 60 * 1000;
 
-let dbInstance = null;
-let dbInitError = null;
-const dbInitPromise = Promise.race([
-  createDatabase(),
-  new Promise((_, reject) => setTimeout(() => reject(new Error("Database initialization timed out after 15s")), 15000)),
-]);
-dbInitPromise
-  .then((db) => { dbInstance = db; })
-  .catch((err) => { dbInitError = err; console.error("[DATABASE] Init failed:", err); });
+let dbPromise = null;
+let dbError = null;
 
-const SYNC_DB_METHODS = new Set(["verifyPassword", "toPublicUser", "toJsUser", "toExamItem"]);
+function getDatabase() {
+  if (dbError) return Promise.reject(dbError);
+  if (dbPromise) return dbPromise;
+  dbPromise = createDatabase().catch((err) => {
+    dbError = err;
+    dbPromise = null;
+    console.error("[DATABASE] Init failed:", err);
+    throw err;
+  });
+  return dbPromise;
+}
+
 const database = new Proxy({}, {
   get(target, prop) {
-    if (SYNC_DB_METHODS.has(prop)) {
-      return (...args) => {
-        if (dbInitError) throw dbInitError;
-        if (!dbInstance) throw new Error("Database is still initializing.");
-        return dbInstance[prop](...args);
-      };
-    }
     return async (...args) => {
-      if (dbInitError) throw dbInitError;
-      const db = dbInstance || await dbInitPromise;
+      const db = await getDatabase();
       return db[prop](...args);
     };
   },
@@ -58,6 +54,10 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(projectRoot, { extensions: ["html"], dotfiles: "ignore" }));
+
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true, env: process.env.VERCEL || "local", time: Date.now() });
+});
 
 app.post("/api/auth/send-code", async (req, res, next) => {
   try {
@@ -329,7 +329,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: error.publicMessage || "Erro interno do servidor." });
 });
 
-if (process.env.VERCEL !== "1") {
+if (!process.env.VERCEL && !process.env.VERCEL_ENV) {
   app.listen(PORT, () => {
     console.log(`Lâminas UMC rodando em http://localhost:${PORT}`);
     console.log(`Banco MySQL: ${process.env.DB_NAME || "laminas_umc"}`);
